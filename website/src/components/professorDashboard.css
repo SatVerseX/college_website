@@ -1,0 +1,71 @@
+/* Dashboard Background */
+.professor-dashboard {
+  background: #121212;
+ 
+  
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px; /* To avoid overlap with navbar */
+}
+
+/* Centered Dashboard Content */
+.dashboard-content {
+  
+  text-align: center;
+  padding: 40px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.dashboard-content h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #ff004d;
+}
+
+.dashboard-content h1 span {
+  color: white;
+}
+
+.dashboard-content p {
+  font-size: 18px;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* Loading and Error Messages */
+.loading, .error {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-content {
+    padding: 20px;
+  }
+
+  .dashboard-content h1 {
+    font-size: 28px;
+  }
+
+  .dashboard-content p {
+    font-size: 16px;
+  }
+}

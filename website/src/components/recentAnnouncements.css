@@ -1,0 +1,141 @@
+/* Main container */
+.recent-announcements-container {
+  background: white; /* Darker background with gradient */
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-width: 700px;
+  margin: 40px auto;
+  font-family: 'Roboto', sans-serif;
+  color: #f5f5f5;
+  overflow: hidden;
+  position: relative;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Heading */
+.announcement-heading {
+  font-size: 2rem;
+  color:#ff004d; /* JioCinema-inspired golden accent */
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+  animation: headingAnimation 1s ease-out;
+}
+
+@keyframes headingAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* List */
+.announcement-list {
+  list-style: none;
+  padding: 0;
+  max-height: 350px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.announcement-item {
+  background: linear-gradient(145deg, #b416f8, #6161fb); /* Slightly lighter dark background for cards */
+  padding: 20px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  opacity: 0;
+  animation: fadeInItem 0.8s ease-out forwards;
+}
+
+@keyframes fadeInItem {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effect for announcement items */
+.announcement-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  background-color:linear-gradient(145deg, #fffefe, #8b8bf9);
+}
+
+.announcement-item div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.announcement-item strong {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+/* Accent color for text on hover */
+.announcement-item:hover strong {
+  color: #f39c12; /* Golden accent on hover */
+}
+
+/* Author name and date styling */
+.announcement-item .author-name {
+  font-weight: 600;
+  color: #f39c12; /* Author name in gold */
+}
+
+.announcement-item .date {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #a0a0a0; /* Lighter gray for date */
+}
+
+/* Loading container */
+.loading-container {
+  text-align: center;
+  font-size: 1.4rem;
+  color: #f39c12;
+  margin-top: 50px;
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .recent-announcements-container {
+    padding: 20px;
+    margin: 15px;
+  }
+
+  .announcement-heading {
+    font-size: 1.8rem;
+  }
+
+  .announcement-item {
+    padding: 15px;
+  }
+}
