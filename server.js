@@ -18,7 +18,7 @@ mongoose
   .then(() => console.log("MongoDB Connected!"))
   .catch((err) => console.log(err));
 
-// User Schema
+// User ka Schema
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
@@ -76,7 +76,7 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
-// Login Endpoint
+// Login ka Endpoint
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -87,7 +87,7 @@ app.post("/api/login", async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ error: "Invalid credentials!" });
 
-    // JWT Token Generate
+    // JWT Token Generate karne ke liye
     const token = jwt.sign(
       { userId: user._id, role: user.role },
       process.env.JWT_SECRET,
@@ -109,7 +109,7 @@ app.get("/api/profile", authenticate, async (req, res) => {
     }
     res.json(user);
   } catch (error) {
-    console.error(error); // Log any error for debugging
+    console.error(error); 
     res.status(500).json({ error: "Server error" });
   }
 });
@@ -118,7 +118,7 @@ app.put("/api/profile", authenticate, async (req, res) => {
   try {
     const { name, email } = req.body;
 
-    // Log the incoming request body for debugging purposes
+    
     console.log("Received update request with data:", { name, email });
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -133,12 +133,12 @@ app.put("/api/profile", authenticate, async (req, res) => {
 
     res.json(updatedUser);
   } catch (error) {
-    console.error("Error in profile update:", error); // Log the actual error
+    console.error("Error in profile update:", error); // error check karne ke liye
     res.status(500).json({ error: "Profile update failed" });
   }
 });
 
-// Update User Profile
+// Update User ka Profile
 app.put("/api/user/update", authenticate, async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {
@@ -150,7 +150,7 @@ app.put("/api/user/update", authenticate, async (req, res) => {
   }
 });
 
-// User Data Endpoint
+// User ka Data Endpoint
 app.get("/api/user", authenticate, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select("-password"); // Hide password
@@ -209,7 +209,7 @@ app.post("/api/schedule", authenticate, async (req, res) => {
   }
 });
 
-// API to Cancel or Reschedule a Class (Professors Only, if slots available)
+// API to Cancel or Reschedule a Class (keval professor ke liye agar slot khali ho to)
 app.put("/api/schedule/:id", authenticate, async (req, res) => {
   try {
     if (req.user.role !== "Professor") {
@@ -272,7 +272,7 @@ const leaveSchema = new mongoose.Schema({
 
 const Leave = mongoose.model("Leave", leaveSchema);
 
-// Mark Leave Endpoint
+// Mark Leave ka Endpoint
 app.post("/api/mark-leave", authenticate, async (req, res) => {
   try {
     console.log(req);
@@ -307,10 +307,10 @@ app.post("/api/mark-leave", authenticate, async (req, res) => {
       reason,
     });
 
-    // Debugging leave object before saving
+   
     console.log("Leave entry before save:", leave);
 
-    await leave.save(); // Save the leave entry
+    await leave.save(); 
     console.log("Leave entry saved:", leave);
     res.json({ message: "Leave marked successfully for the single date!" });
   } catch (error) {
@@ -320,7 +320,7 @@ app.post("/api/mark-leave", authenticate, async (req, res) => {
 });
 
 app.get("/api/leaves", authenticate, async (req, res) => {
-  console.log("Request received for /api/leaves"); // Check if the route is hit
+  console.log("Request received for /api/leaves"); 
   try {
     if (req.user.role !== "Student") {
       return res.status(403).json({
@@ -390,7 +390,7 @@ app.get("/api/announcements", authenticate, async (_req, res) => {
 
 
 
-// Post Announcement Endpoint (Only Professors can post)
+// Post Announcement Endpoint (sirf Professors  post kar sakte hain)
 app.post("/api/announcement", authenticate, async (req, res) => {
   try {
     if (req.user.role !== "Professor") {
@@ -401,7 +401,7 @@ app.post("/api/announcement", authenticate, async (req, res) => {
     const announcement = new Announcement({
       message,
       author: req.user.userId,
-      createdAt: new Date(), // Ensure timestamp is saved
+      createdAt: new Date(), 
     });
 
     await announcement.save();
@@ -425,7 +425,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Handle profile picture upload
+
 // Handle profile picture upload
 app.post(
   "/api/upload-profile-picture",
